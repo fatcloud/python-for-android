@@ -38,12 +38,17 @@ class PyZMQRecipe(CythonRecipe):
 
         env = self.get_recipe_env(arch)
         setup_cfg = join(self.get_build_dir(arch.arch), "setup.cfg")
-        with open(setup_cfg, "wb") as fd:
-            fd.write("""
+        
+        cfg_content = """
 [global]
 zmq_prefix = {}
 skip_check_zmq = True
-""".format(libzmq_prefix))
+""".format(libzmq_prefix)
+        with open(setup_cfg, "wb") as fd:
+            try:
+                fd.write(cfg_content)
+            except:
+                fd.write(cfg_content.encode())
 
         return super(PyZMQRecipe, self).build_cython_components(arch)
 
