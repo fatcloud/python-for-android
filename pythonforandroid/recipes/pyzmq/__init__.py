@@ -1,5 +1,5 @@
 # coding=utf-8
-
+from __future__ import unicode_literals
 from pythonforandroid.recipe import CythonRecipe, Recipe
 from os.path import join
 from pythonforandroid.util import current_directory
@@ -43,7 +43,7 @@ class PyZMQRecipe(CythonRecipe):
 [global]
 zmq_prefix = {}
 skip_check_zmq = True
-""".format(libzmq_prefix))
+""".format(libzmq_prefix).encode())
 
         return super(PyZMQRecipe, self).build_cython_components(arch)
 
